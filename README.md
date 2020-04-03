@@ -12,6 +12,11 @@ it as the default implementation.
 
 Implementation can be exchanged on demand without doing modification to your app's code.
 
+Usage
+-----
+
+The usage is very simple. Refer to [example.go](examples/example.go) file to get an idea on how to use it.
+
 
 License
 -------
