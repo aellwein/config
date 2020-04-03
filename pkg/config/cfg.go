@@ -8,10 +8,10 @@ import (
 
 type myCfg struct {
 	v       *viper.Viper
-	options []CfgOption
+	options map[CfgOption]bool
 }
 
-type newConfigT struct {
+type newBuilderT struct {
 	cfg *myCfg
 }
 
@@ -35,23 +35,25 @@ type optionsT struct {
 	cfg *myCfg
 }
 
-type CfgOption uint
+// CfgOption provides a type for config options which can be passed using Options()
+type CfgOption string
 
 const (
-	NoErrorOnMissingCfgFileOption CfgOption = iota
+	// NoErrorOnMissingCfgFileOption defines that there should be no error upon creation of Cfg if none of config files could be found.
+	NoErrorOnMissingCfgFileOption CfgOption = "NoErrorOnMissingCfgFileOption"
 )
 
-// NewWithOptions creates a new config
-func NewConfig() *newConfigT {
-	return &newConfigT{
+// NewBuilder creates a new config builder
+func NewBuilder() *newBuilderT {
+	return &newBuilderT{
 		cfg: &myCfg{
 			v:       viper.New(),
-			options: make([]CfgOption, 0),
+			options: make(map[CfgOption]bool),
 		},
 	}
 }
 
-func (t *newConfigT) ConfigName(name string) *configNameT {
+func (t *newBuilderT) ConfigName(name string) *configNameT {
 	t.cfg.v.SetConfigName(name)
 	return &configNameT{
 		cfg: t.cfg,
@@ -103,7 +105,7 @@ func (t *configPathsT) NoDefaults() *defaultsT {
 
 func (t *defaultsT) Options(options ...CfgOption) *optionsT {
 	for _, i := range options {
-		t.cfg.options = append(t.cfg.options, i)
+		t.cfg.options[i] = true
 	}
 	return &optionsT{
 		cfg: t.cfg,
@@ -111,10 +113,8 @@ func (t *defaultsT) Options(options ...CfgOption) *optionsT {
 }
 
 func (c *myCfg) HasOption(option CfgOption) bool {
-	for _, o := range c.options {
-		if option == o {
-			return true
-		}
+	if _, ok := c.options[option]; ok {
+		return true
 	}
 	return false
 }

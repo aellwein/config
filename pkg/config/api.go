@@ -2,6 +2,8 @@ package config
 
 import "time"
 
+// Cfg defines an interface which is capable to provide object for interaction
+// with configuration.
 type Cfg interface {
 	GetAll() map[string]interface{}
 	Get(key string) interface{}

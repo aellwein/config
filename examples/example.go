@@ -7,12 +7,12 @@ import (
 )
 
 func main() {
-	cfg, err := config.NewConfig().
+	cfg, err := config.NewBuilder().
 		ConfigName("example").
 		ConfigType("yaml").
-		ConfigPaths(".").
+		ConfigPaths("./examples/configs/", "$HOME/").
 		Defaults(map[string]interface{}{
-			"foo":   1,
+			"foo":   2,
 			"bar":   42,
 			"baz":   []string{"BAZ", "na"},
 			"error": false,

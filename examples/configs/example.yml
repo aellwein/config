@@ -1,0 +1,8 @@
+some:
+  value: "bla"
+  another: true
+  list:
+    - "one"
+    - "two"
+    - 20
+    - 1.13
