@@ -10,7 +10,10 @@ func main() {
 	cfg, err := config.NewBuilder().
 		ConfigName("example").
 		ConfigType("yaml").
-		ConfigPaths("./examples/configs/", "$HOME/").
+		ConfigPaths(
+			"./examples/configs/",
+			"$HOME/",
+		).
 		Defaults(map[string]interface{}{
 			"foo":   2,
 			"bar":   42,
