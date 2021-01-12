@@ -6,7 +6,7 @@ import (
 
 const (
 	// ContextConfigValue can be used as key to query the config object
-	ContextConfigValue = "github.com/aellwein/config/pkg/config.Cfg"
+	ContextConfigValue = "github.com/aellwein/config/v1/config.Cfg"
 )
 
 // Context is used to pass context with underlying config object to commands.
