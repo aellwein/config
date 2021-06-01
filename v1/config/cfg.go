@@ -198,6 +198,10 @@ func (c *myCfg) GetStringSlice(key string) []string {
 	return c.v.GetStringSlice(key)
 }
 
+func (c *myCfg) Set(key string, val interface{}) {
+	c.v.Set(key, val)
+}
+
 func (c *myCfg) Write() error {
 	return c.v.WriteConfig()
 }

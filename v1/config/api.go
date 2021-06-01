@@ -21,6 +21,9 @@ type Cfg interface {
 	GetSizeInBytes(key string) uint
 	GetTime(key string) time.Time
 	GetStringSlice(key string) []string
+
+	Set(key string, val interface{})
+
 	// Saves back the config (forces overwrite)
 	Write() error
 }
