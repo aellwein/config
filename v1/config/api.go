@@ -21,4 +21,6 @@ type Cfg interface {
 	GetSizeInBytes(key string) uint
 	GetTime(key string) time.Time
 	GetStringSlice(key string) []string
+	// Saves back the config (forces overwrite)
+	Write() error
 }
